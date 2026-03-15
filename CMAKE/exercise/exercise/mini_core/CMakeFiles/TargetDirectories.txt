@@ -1,0 +1,8 @@
+/home/biar/Desktop/CSO/E1/exercise/exercise/mini_core/CMakeFiles/edit_cache.dir
+/home/biar/Desktop/CSO/E1/exercise/exercise/mini_core/CMakeFiles/rebuild_cache.dir
+/home/biar/Desktop/CSO/E1/exercise/exercise/mini_core/src/CMakeFiles/core_library.dir
+/home/biar/Desktop/CSO/E1/exercise/exercise/mini_core/src/CMakeFiles/edit_cache.dir
+/home/biar/Desktop/CSO/E1/exercise/exercise/mini_core/src/CMakeFiles/rebuild_cache.dir
+/home/biar/Desktop/CSO/E1/exercise/exercise/mini_core/executables/CMakeFiles/many_object.dir
+/home/biar/Desktop/CSO/E1/exercise/exercise/mini_core/executables/CMakeFiles/edit_cache.dir
+/home/biar/Desktop/CSO/E1/exercise/exercise/mini_core/executables/CMakeFiles/rebuild_cache.dir

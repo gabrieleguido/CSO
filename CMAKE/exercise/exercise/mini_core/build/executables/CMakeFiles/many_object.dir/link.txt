@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/many_object.dir/many_object_in_stack_example.cpp.o -o many_object  -Wl,-rpath,/home/biar/Desktop/CSO/E1/exercise/exercise/mini_core/build/src ../src/libcore_library.so 

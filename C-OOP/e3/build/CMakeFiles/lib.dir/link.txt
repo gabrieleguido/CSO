@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC -shared -Wl,-soname,liblib.so -o liblib.so CMakeFiles/lib.dir/linked_list.c.o CMakeFiles/lib.dir/float_list.c.o CMakeFiles/lib.dir/int_list.c.o CMakeFiles/lib.dir/list_list.c.o 
