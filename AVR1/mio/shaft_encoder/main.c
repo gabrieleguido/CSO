@@ -1,8 +1,9 @@
 #include <util/delay.h> 
 #include <stdio.h>
-#include "../avr_common/uart.h"
+#include "uart.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <stdlib.h>
 
 #define PINMASK 0b11
 
@@ -11,6 +12,8 @@ volatile uint8_t curr_pin;
 
 volatile uint8_t int_occurred = 0;
 volatile int8_t int_count = 0;
+
+uint8_t str_buff[1024];
 
 static int8_t transition[16] = {
     [0b0000] = 0,
@@ -30,16 +33,30 @@ static int8_t transition[16] = {
     [0b1110] = 1,
     [0b1111] = 0
 };
+ISR(TIMER1_COMPA_vect){
+    int_occurred = 1;
+}
 
 ISR(PCINT0_vect){
     prev_pin = curr_pin;
     curr_pin = (~PINB)&PINMASK;
-    int_occurred = 1;
     int_count+= transition[(prev_pin<<2)|curr_pin];
 }
 
 int main(void){
-    printf_init();
+    UART_init();
+    //TIMER CONF:
+    TCCR1A = 0;
+    TCCR1B = (1<<WGM12)|(1<<CS12)|(1<<CS10); //prescaler 1024
+
+    //COMPARE VALUE
+    OCR1A = 156;
+
+    //ATTIVO INTERRUPT SU OCR1A 
+    cli();
+    TIMSK1 = (1<<OCIE1A);
+
+    //PCINT CONF:
     DDRB &= ~PINMASK;
     PORTB |= PINMASK;
 
@@ -50,6 +67,8 @@ int main(void){
     while(1){
         while(!int_occurred);
         int_occurred = 0;
-        printf("pos %d, prev:%x , curr:%x!\n",int_count,prev_pin,curr_pin);
+        // printf("pos %d, prev:%x , curr:%x!\n",int_count,prev_pin,curr_pin);
+        snprintf((char*)str_buff,1024,"pos %d, prev:%x , curr:%x!\n",int_count,prev_pin,curr_pin);
+        UART_putString(str_buff);
     }
 }
